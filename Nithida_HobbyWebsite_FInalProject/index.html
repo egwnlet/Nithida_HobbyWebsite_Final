@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Hobby Website</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+    /* ===== BIG FEATURE HOBBY CARDS ===== */
+    .hobbies-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 35px;
+        margin-top: 40px;
+    }
+
+    .hobby-card {
+        background: linear-gradient(135deg, #8ba2d9, #6f7bb2);
+        padding: 45px 25px;
+        border-radius: 22px;
+        text-align: center;
+        text-decoration: none;
+        color: white !important;
+        transition: 0.35s ease;
+        box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+    }
+
+    .hobby-card:hover {
+        transform: translateY(-10px) scale(1.03);
+        background: linear-gradient(135deg, #738ac7, #4f5c80);
+    }
+
+    .hobby-card h3 {
+        font-size: 1.6em;
+        margin-top: 15px;
+    }
+
+    .hobby-card p {
+        font-size: 1.05em;
+        opacity: 0.95;
+        color: white;
+    }
+
+    .hobby-icon {
+        font-size: 3em;
+    }
+
+    /* ===== MINI GAME PANEL STYLE ===== */
+    #game {
+        margin-top: 40px;
+        border: 3px solid #8ba2d9;
+        border-radius: 20px;
+        padding: 35px;
+        background: rgba(240, 244, 255, 0.7);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    body.dark #game {
+        background: rgba(40,45,70,0.9);
+        border-color: #6f7bb2;
+    }
+
+    #game h2 {
+        font-size: 2em;
+        margin-bottom: 10px;
+    }
+
+    #game h3 {
+        margin-bottom: 25px;
+        font-weight: 600;
+        opacity: 0.9;
+    }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <main>
+
+    <!-- HEADER -->
+    <header>
+        <h1>Welcome to My Hobby Website</h1>
+        <p>Hello! My name is <strong>Nithida Wattanachai</strong>. These are my hobbies:</p>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <a href="hobby1.html">Singing</a>
+        <a href="hobby2.html">Jigsaw Puzzles</a>
+        <a href="hobby3.html">Origami</a>
+        <a href="#game">Mini Game</a>
+    </nav>
+
+    <!-- ABOUT SECTION -->
+    <section>
+        <h2>About Me</h2>
+        <p>
+            I'm someone who enjoys creative and calming activities in my free time.
+            Singing allows me to express my emotions and helps build my confidence.
+            Solving jigsaw puzzles helps me relax while challenging my focus and patience.
+            Origami allows me to create beautiful things from simple materials.
+            These hobbies bring joy and balance into my life.
+        </p>
+
+        <h2 style="margin-top:40px;">My Hobbies</h2>
+
+        <div class="hobbies-list">
+            <a href="hobby1.html" class="hobby-card">
+                <div class="hobby-icon">🎤</div>
+                <h3>Singing</h3>
+                <p>A fun and expressive musical hobby.</p>
+            </a>
+
+            <a href="hobby2.html" class="hobby-card">
+                <div class="hobby-icon">🧩</div>
+                <h3>Jigsaw Puzzles</h3>
+                <p>A relaxing way to challenge the mind.</p>
+            </a>
+
+            <a href="hobby3.html" class="hobby-card">
+                <div class="hobby-icon">🗞️</div>
+                <h3>Origami</h3>
+                <p>Creative art of folding paper.</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- MINI GAME SECTION -->
+    <section id="game">
+        <h2>⛏️ Mini Game: Rock Miner</h2>
+        <h3>Game ends at 60 seconds OR you win by getting 45 points!!</h3>
+
+        <div class="game-container">
+            <p id="gameStatus">Inspired by Blast Mining from Roblox in 'Epic Minigames'</p>
+
+            <div class="score-board">
+                <span>Score: <strong id="score">0</strong></span>
+                <span>Time: <strong id="timer">60</strong>s</span>
+            </div>
+
+            <div id="gameArea" class="game-area"></div>
+
+            <div class="game-buttons">
+                <button id="startGame">Start Game</button>
+                <button id="resetGame">Reset</button>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2025 Nithida Wattanachai | Created with HTML, CSS & JavaScript</p>
+    </footer>
+
+</div>
+
+<!-- Theme Toggle Button -->
+<div class="theme-btn" onclick="toggleTheme()">🌙</div>
+
+<!-- Contact Button -->
+<div class="contact-btn" onclick="toggleForm()">✉</div>
+
+<!-- Contact Form -->
+<div class="contact-form" id="contactForm">
+    <h3>Send Feedback</h3>
+    <label>Name</label>
+    <input type="text">
+
+    <label>Message</label>
+    <textarea rows="3"></textarea>
+
+    <button class="send-btn" onclick="sendFeedback()">Send</button>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* ================= THEME ================= */
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark");
+    }
+
+    window.toggleTheme = function () {
+        document.body.classList.toggle("dark");
+        localStorage.setItem("theme",
+            document.body.classList.contains("dark") ? "dark" : "light"
+        );
+    };
+
+    /* ================= CONTACT FORM ================= */
+    window.toggleForm = function () {
+        document.getElementById("contactForm").classList.toggle("open");
+    };
+
+    window.sendFeedback = function () {
+    const form = document.getElementById("contactForm");
+    const inputs = form.querySelectorAll("input, textarea");
+
+    // Clear all inputs
+    inputs.forEach(input => input.value = "");
+
+    // Optional: close the form after sending
+    form.classList.remove("open");
+}
+
+    /* ================= MINING GAME ================= */
+    let score = 0;
+    let timeLeft = 60;
+    let gameRunning = false;
+    let timerInterval;
+    let spawnInterval;
+
+    const scoreEl = document.getElementById("score");
+    const timerEl = document.getElementById("timer");
+    const gameArea = document.getElementById("gameArea");
+    const gameStatus = document.getElementById("gameStatus");
+
+    function spawnItem() {
+        let pool = [];
+
+        if (score <= 30) {
+            pool = ["rock","rock","rock","rock","rock","bomb","bomb","x"];
+        } else {
+            pool = ["rock","rock","rock","rock","bomb","bomb","bomb","x"];
+        }
+
+        const type = pool[Math.floor(Math.random() * pool.length)];
+        const item = document.createElement("div");
+        item.classList.add("game-item");
+
+        if (type === "rock") item.textContent = "🪨";
+        if (type === "bomb") item.textContent = "💣";
+        if (type === "x") item.textContent = "❌";
+
+        item.addEventListener("click", function () {
+            if (!gameRunning) return;
+
+            if (type === "rock") {
+                score += 2;
+                gameStatus.textContent = "Nice! +2 points!";
+                gameStatus.style.color = "green";
+            }
+
+            if (type === "bomb") {
+                score = Math.max(0, score - 3);
+                gameStatus.textContent = "Boom! -3 points!";
+                gameStatus.style.color = "red";
+            }
+
+            if (type === "x") {
+                alert("Aw man :(");
+                window.location.href = "https://www.google.com";
+                return;
+            }
+
+            scoreEl.textContent = score;
+            item.remove();
+
+            if (score >= 45) {
+                endGame();
+                alert("🎉 You win! Master Miner!");
+            }
+        });
+
+        gameArea.appendChild(item);
+
+        setTimeout(() => {
+            item.remove();
+        }, 1500);
+    }
+
+    function startGame() {
+        if (gameRunning) return;
+
+        score = 0;
+        timeLeft = 60;
+        gameRunning = true;
+
+        scoreEl.textContent = score;
+        timerEl.textContent = timeLeft;
+        gameStatus.textContent =
+            "Mine rocks! Avoid bombs! Rocks give you 2 points, bombs take away 3 points, and the ❌ is NOT good!";
+
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            timerEl.textContent = timeLeft;
+
+            if (timeLeft <= 0) {
+                endGame();
+                alert("⏰ Time's up! Final Score: " + score);
+            }
+        }, 1000);
+
+        spawnInterval = setInterval(spawnItem, 1400);
+    }
+
+    function endGame() {
+        gameRunning = false;
+        clearInterval(timerInterval);
+        clearInterval(spawnInterval);
+    }
+
+    function resetGame() {
+        endGame();
+        score = 0;
+        timeLeft = 60;
+        scoreEl.textContent = score;
+        timerEl.textContent = timeLeft;
+        gameStatus.textContent = "Game reset. Click Start!";
+        gameArea.innerHTML = "";
+    }
+
+    document.getElementById("startGame").addEventListener("click", startGame);
+    document.getElementById("resetGame").addEventListener("click", resetGame);
+
+});
+</script>
+
+</body>
+</html>
